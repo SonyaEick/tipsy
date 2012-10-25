@@ -2,17 +2,66 @@
     <head><title>This is my database!</title></head>
     <body>
         <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
-        <h1>Task List</h1>
-        <ul>
-        {% for task in tasks %}
-        <li>Task {{ task['id'] }}: {{ task['title'] }}: {{ task['completed_at'] }}</li>
-        {% endfor %}
-        </ul>
 
+
+<!-- Form For Adding a Task --> 
+<div id="SaveTask">
+    <h1>Enter New Task</h1>
     <form method="POST" action="/save_task">
         <input type="text" name="task_title"></input>
         <input type="submit">
     </form>
+</div>
+
+<!-- Form For Deleting a Task -->
+ <div id="DeleteTask">
+    <h1>Delete a Task</h1> 
+    <form method="POST" action="/del_task">
+        <input type="text" name="del_title"></input>
+        <input type="submit">
+    </form>
+</div>
+
+<!-- The Task List -->
+ <div id="tasklist">
+    <h1>Task List</h1>
+    <ul>
+    {% for task in tasks %}
+    <li>Task {{ task['id'] }}: {{ task['title'] }}: {{ task['completed_at'] }}</li>
+    {% endfor %}
+    </ul>
+</div>
+<!-- Form For Adding a User --> 
+<br /><br />
+    <h1>Enter New User</h1>
+<div id="addusername">
+    <h3>Enter User Name</h3>
+    <form method="POST" action="/save_user">
+        <input type="text" name="user_name"></input>
+</div>
+<div id="adduseremail">
+    <h3>Enter User Email</h3>
+        <input type="text" name="user_email"></input>
+        <br /><input type="submit">
+    </form>
+</div>
+<!-- Remove User -->
+ <div id="DeleteUser">
+    <h1>Delete a User</h1> 
+    <form method="POST" action="/del_user">
+        <input type="text" name="del_name"></input>
+        <input type="submit">
+    </form>
+</div>
+<!-- The User List -->
+    <h1>User List</h1>
+    <ul>
+    {% for user in users %}
+    <li>User {{ user['id'] }}: {{ user['name'] }}: {{ user['email'] }}</li>
+    {% endfor %}
+    </ul>
+
+<!-- Form For Deleting a Task --> 
 
     </body>
 </html>

@@ -112,6 +112,7 @@ body {
   color: #333333;
   background-color: #ffffff;
 }
+
 a {
   color: #0088cc;
   text-decoration: none;
@@ -3494,3 +3495,31 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
+
+body #SaveTask{
+  width: 50%;
+  float:left;
+}
+
+body #DeleteTask{
+  width: 50%;
+  float:right;
+
+}
+
+body #tasklist{
+  width: 50%;
+  margin-left:25px;
+}
+
+body #addusername{
+  width: 50%;
+  float:left;
+}
+
+body #adduseremail{
+  width: 50%;
+  float:right;
+}
+
+

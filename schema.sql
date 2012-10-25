@@ -8,7 +8,7 @@ create table Users (
 );
 create table Tasks (
     id INTEGER PRIMARY KEY,
-    title VARCHAR(64),
+    title VARCHAR(128),
     created_at DATETIME,
     completed_at DATETIME,
     user_id INTEGER
