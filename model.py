@@ -2,26 +2,24 @@
 model.py
 """
 import sqlite3
+import datetime 
+
+TASK_COLS = ["id", "title", "created_at", "completed_at", "user_id"]
+USER_COLS = ["id", "email", "password", "username"]
 
 def connect_db():
     return sqlite3.connect("tipsy.db")
 
-# def new_user(db, email, password, name):          
-#     c = db.cursor()                                     
-#     query = """INSERT INTO Users VALUES (NULL, ?, ?, ?)"""                                                           
-#     res = c.execute(query, (email, password, name))           
-#     if res:
-#         db.commit()
-#         return res.lastrowid
+def new_user(db, email, password, name):          
+    vals= [email, password, name]
+    return insert_into_table(db, "Users", USER_COLS, vals)
 
-# def new_task(db, title, user_id = None):
-#     """Given a title and a user_id, create a new task belonging to that user. Return the id of the created task"""
-#     c = db.cursor()
-#     query = """INSERT into Tasks values (null, ?, DATETIME('now'), null, ?)"""
-#     res = c.execute(query, (title, user_id))
-#     if res:
-#         db.commit()
-#         return res.lastrowid
+def new_task(db, title, user_id = None):
+    """Given a title and a user_id, create a new task belonging to that user. 
+    Return the id of the created task"""
+
+    vals= [title, datetime.datetime.now(), None, user_id ]
+    return insert_into_table(db, "Tasks", TASK_COLS, vals)
 
 def insert_into_table(db, table, columns, values):
     c = db.cursor()
@@ -34,7 +32,6 @@ def insert_into_table(db, table, columns, values):
         db.commit()
         return res.lastrowid
   
-
 def remove_user(db, user_id):          
     c = db.cursor()                                     
     query = """DELETE FROM Users WHERE id =?"""                                                           
@@ -57,28 +54,7 @@ def authenticate(db, email, password):
     if result:
         fields = ["id", "email", "password", "username"]
         return make_user(result)
-
     return None
-
-# def get_user(db, user_id):
-#     """Gets a user dictionary out of the database given an id"""
-#     c = db.cursor()
-#     query = """SELECT * from Users WHERE id = ?"""
-#     c.execute(query, (user_id,))
-#     user_row = c.fetchone()
-#     if user_row:
-#         return make_user(user_row)
-#     return None
-
-# def get_task(db, task_id):
-#     """Gets a single task, given its id. Returns a dictionary of the task data."""
-#     c = db.cursor()
-#     query = """SELECT * from Tasks WHERE id = ?"""
-#     c.execute(query, (task_id,))
-#     task_row = c.fetchone()
-#     if task_row:
-#         return make_task(task_row)
-#     return None
 
 def make_user(row):
     fields = ["id", "email", "password", "username"]
